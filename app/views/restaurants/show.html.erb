@@ -1,7 +1,18 @@
-<h2>Name <%=@user.name%> </h2>
+<h2>Name: <%=@restaurant.name%> </h2>
+<p>Rating: <%=@restaurant.rating%></p>
+<p>Address: <%=@restaurant.address%></p>
 
-<h2>Restaurants</h2>
-
-<ul> <% @user.restaurants.each do |restaurant| %>
-<li> <a href="/restaurants/restaurant.id"> <%= restaurant.name %> </a></li>
+<p>People who want to try:</p>
+<ul> <% @restaurant.users.each do |user| %>
+<li> <a href="/users/<%= user.id %>"> <%= user.name %> </a></li>
 <% end %> </ul>
+
+<p>Add to list of restaurants to try:</p>
+<ul><form action='/restaurants/<%= @restaurant.id %>/users' method='post'>
+  <input type='hidden' name='_method' id='hidden' value='patch'>
+  <select name='user_id'>
+  <% @all_users.each do |user| %>
+    <option value='<%=user.id%>'><%=user.name%></option>
+    <% end %>
+</select></ul>
+<input type='submit' value='submit'></form>
