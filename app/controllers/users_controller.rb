@@ -16,8 +16,33 @@ class UsersController < ApplicationController
 
   	get '/users/:id' do
   		@user = User.find(params[:id])
-  		erb :'/users/show.html'
+  		erb :'users/show.html'
   	end
+
+    get '/users/:id/edit' do
+      @user = User.find(params[:id])
+      erb :'users/edit.html'
+    end
+
+    patch '/users/:id' do
+      @user = User.find(params[:id])
+      @user.update(name: params[:name])
+      redirect to "/users/#{@user.id}"
+    end
+
+    get '/users/:id/delete' do
+      @user = User.find(params[:id])
+      erb :'users/delete.html'
+    end
+
+    delete '/users/:id/delete' do
+      @user = User.find(params[:id])
+      @user.destroy
+      redirect to '/users'
+    end
+
+
+
  end
 
 

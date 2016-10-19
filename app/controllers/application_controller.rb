@@ -3,7 +3,7 @@ class ApplicationController < Sinatra::Base
   set(:views, 'app/views')
 
   get '/' do
-  	erb :'users/index'
+  	redirect to '/users'
   end
 
 end
