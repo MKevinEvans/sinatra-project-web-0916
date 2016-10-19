@@ -3,8 +3,7 @@ class ApplicationController < Sinatra::Base
   set(:views, 'app/views')
 
   get '/' do
-  	redirect to '/users'
+  	redirect to '/restaurants'
   end
 
 end
-

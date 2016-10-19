@@ -1,14 +1,7 @@
 class RestaurantsController < ApplicationController
 
   get '/restaurants' do
-    
-    response = Yelp.client.search('Santa Barbara')
-    binding.pry
-    response.businesses.each do |restaurant|
-    # Restaurant.create(name: restaurant.name, rating: restaurant.rating, address: restaurant.address.first)
-    end
       @all_restaurants = Restaurant.all
-
     erb :'restaurants/index.html'
   end
 
@@ -32,10 +25,31 @@ class RestaurantsController < ApplicationController
     erb :'restaurants/edit.html'
   end
 
+  get '/restaurants/search/:location/:term' do
+    @results = YelpApi.search(params[:location].gsub("+"," "), params[:term].gsub("+"," "))
+    @all_users = User.all
+      erb :'restaurants/results.html'
+    end
+
   get '/restaurants/search' do
       erb :'restaurants/search.html'
     end
 
+  post '/restaurants/search' do
+    @results = YelpApi.search(params[:location], params[:term])
+    redirect to "restaurants/search/#{params[:location].gsub(" ","+")}/#{params[:term].gsub(" ","+")}"
+  end
+
+  patch '/restaurants/results' do
+    # binding.pry
+    @user = User.find(params[:user_id])
+    @results = params[:restaurants]
+    @results.each do |restaurant_id|
+      @user.restaurants << Restaurant.find(restaurant_id)
+    end
+    @user.save
+    redirect to "users/#{@user.id}"
+  end
 
   get '/restaurants/:id' do
     @restaurant = Restaurant.find(params[:id])

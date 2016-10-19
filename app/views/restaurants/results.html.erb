@@ -1,0 +1,26 @@
+<a href="/restaurants/new">Add a Restaurant</a>&emsp;
+<a href="/restaurants">See All Restaurants</a>&emsp;
+<a href="/users/new">Add a User</a>&emsp;
+<a href="/users">See All Users</a>
+<br><br>
+<form action="/restaurants/search" method="post">
+
+<h3>Search location: <input type="text" name="location"></h3>
+<h4>Keyword: <input type="text" name="term"></h4>
+
+<input type="submit" value="search">
+</form>
+
+<form action="/restaurants/results" method="post">
+  <input type="hidden" name="_method" value="patch">
+<%@results.each do |restaurant| %>
+<p><input type="checkbox" name="restaurants[]" value="<%=restaurant.id%>">
+<a href="/restaurants/<%=restaurant.id%>"> <%=restaurant.name%></a></input></p>
+<%end%>
+  <select name='user_id'>
+  <% @all_users.each do |user| %>
+    <option value='<%=user.id%>'><%=user.name%></option>
+    <% end %>
+</select></ul>
+<input type="submit" value="add favorites">
+</form>
