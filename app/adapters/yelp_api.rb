@@ -10,13 +10,10 @@ class YelpApi
 
   def self.search(location, term)
     @response = client.search(location, {term: term})
-    parse(@response)
-  end
-
-  def self.parse(search)
-    search.businesses.map do |business|
-      Restaurant.create(name: business.name, rating: business.rating, address: business.location.display_address.join(', '))
+    @response.businesses.map do |business|
+      Restaurant.find_or_create(business)
     end
   end
+
 
 end

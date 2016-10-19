@@ -1,0 +1,11 @@
+<form action="/restaurants/search" method="post">
+
+<h3>Search location: <input type="text" name="location"></h3>
+<h4>Keyword: <input type="text" name="term"></h4>
+
+<input type="submit" value="search">
+</form>
+
+<ul><%@all_restaurants.each do |restaurant| %>
+<li><a href="/restaurants/<%=restaurant.id%>"> <%=restaurant.name%></a></li>
+<%end%></ul>

@@ -32,6 +32,11 @@ class RestaurantsController < ApplicationController
     erb :'restaurants/edit.html'
   end
 
+  get '/restaurants/search' do
+      erb :'restaurants/search.html'
+    end
+
+
   get '/restaurants/:id' do
     @restaurant = Restaurant.find(params[:id])
     @all_users = User.all
@@ -54,6 +59,8 @@ class RestaurantsController < ApplicationController
     @restaurant.destroy
     redirect to '/restaurants'
   end
+
+
 
 
 end

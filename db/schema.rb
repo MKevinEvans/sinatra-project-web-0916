@@ -11,12 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018194113) do
+ActiveRecord::Schema.define(version: 20161019173956) do
 
   create_table "restaurants", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.float  "rating"
+    t.string "yelp_id"
   end
 
   create_table "user_restaurants", force: :cascade do |t|
