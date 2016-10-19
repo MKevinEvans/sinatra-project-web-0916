@@ -1,7 +1,14 @@
 class RestaurantsController < ApplicationController
 
   get '/restaurants' do
-    @all_restaurants = Restaurant.all
+    
+    response = Yelp.client.search('Santa Barbara')
+    binding.pry
+    response.businesses.each do |restaurant|
+    # Restaurant.create(name: restaurant.name, rating: restaurant.rating, address: restaurant.address.first)
+    end
+      @all_restaurants = Restaurant.all
+
     erb :'restaurants/index.html'
   end
 
