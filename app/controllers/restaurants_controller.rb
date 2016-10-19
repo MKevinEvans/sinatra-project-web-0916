@@ -33,7 +33,24 @@ class RestaurantsController < ApplicationController
 
   patch '/restaurants/:id' do
     @restaurant = Restaurant.find(params[:id])
-    @restaurant.update(params)
+    @restaurant.update(params[:restaurant])
     redirect to "restaurants/#{@restaurant.id}"
   end
+
+  get '/restaurants/:id/delete' do
+    @restaurant = Restaurant.find(params[:id])
+    erb :'restaurants/delete.html'
+  end
+
+  delete '/restaurants/:id/delete' do
+    @restaurant = Restaurant.find(params[:id])
+    @restaurant.destroy
+    redirect to '/restaurants'
+  end
+
+  def search
+    parameters = {term: params[:term], limit: 16}
+    render json: Yelp.client.search('San Francisco',parameters)
+  end
+
 end

@@ -1,0 +1,9 @@
+<h1>Edit Restaurant</h1><br>
+<form action="/restaurants/<%=@restaurant.id%>" method='post'>
+<input id="hidden" type="hidden" name="_method" value="patch">
+Name: <input type='text' name="restaurant[name]" value="<%=@restaurant.name%>"><br>
+Rating: <input type='float' name="restaurant[rating]" value="<%=@restaurant.rating%>"><br>
+Address: <input type='text' name="restaurant[address]" value="<%=@restaurant.address%>"><br>
+
+<input type='submit' value='edit'>
+</form>

@@ -1,0 +1,7 @@
+<h1>Delete Restaurant</h1><br>
+<form action="/restaurants/<%=@restaurant.id%>/delete" method='post'>
+<input id="hidden" type="hidden" name="_method" value="delete">
+Name: <%=@restaurant.name%><br>
+<h2>Are you sure you want to delete this restaurant?</h2>
+<input type='submit' value='delete?'>
+</form>
